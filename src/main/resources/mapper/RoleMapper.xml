@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="cn.tycoding.mapper.RoleMapper">
+
+    <!-- 查询所有 -->
+    <select id="findAll" resultType="cn.tycoding.entity.Role">
+        SELECT * FROM tb_role
+    </select>
+
+    <!-- 根据ID查询 -->
+    <select id="findById" resultType="cn.tycoding.entity.Role" parameterType="Long">
+        SELECT * FROM tb_role WHERE id = #{id}
+    </select>
+
+    <!-- 创建 -->
+    <insert id="create" parameterType="cn.tycoding.entity.Role">
+        INSERT INTO tb_role (id, name) VALUES (#{id}, #{name})
+    </insert>
+
+    <!-- 删除 -->
+    <delete id="delete" parameterType="Long">
+        DELETE FROM tb_role WHERE id = #{id}
+    </delete>
+
+    <!-- 更新 -->
+    <update id="update" parameterType="cn.tycoding.entity.Role">
+        UPDATE tb_role SET WHERE 1=1
+        <if test="name != null">
+            name = #{name}
+        </if>
+        WHERE id = #{id}
+    </update>
+
+    <!-- 根据用户名查询 -->
+    <select id="findByName" parameterType="String" resultType="cn.tycoding.entity.Role">
+        SELECT * FROM tb_role WHERE name = #{name}
+    </select>
+
+    <select id="selectPermissionByUserId" parameterType="integer" resultType="string">
+        SELECT DISTINCT sp.permisson from tb_role sp
+
+    </select>
+
+</mapper>

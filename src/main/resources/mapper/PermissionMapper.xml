@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.tycoding.mapper.PermissionMapper">
+    <resultMap id="BaseResultMap" type="cn.tycoding.entity.Permission">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="parent_id" jdbcType="BIGINT" property="parentId"/>
+        <result column="res_name" jdbcType="VARCHAR" property="resName"/>
+        <result column="res_type" jdbcType="CHAR" property="resType"/>
+        <result column="permission" jdbcType="VARCHAR" property="permission"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+    </resultMap>
+
+    <select id="selectPermissionByUserId" parameterType="long" resultType="string">
+        select distinct tp.permission from tb_permission tp
+        inner join tb_role_permission trp on tp.id=trp.permission_id
+        inner join tb_user_role tur on tur.role_id=trp.role_id
+        where tur.user_id=#{userId}
+    </select>
+
+
+</mapper>
